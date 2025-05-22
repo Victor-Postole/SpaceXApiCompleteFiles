@@ -41,8 +41,8 @@ Introduce the MVI pattern to handle UI events such as screen refreshes or forced
 Add a Room database for offline capabilities and to control when API calls are triggered (e.g., on screen refresh).
 
 Improve the repository logic in SpaceXAPIRepositoryImpl by deciding whether to use local cache or API, and move this decision-making outside the ViewModel.
+![image](https://github.com/user-attachments/assets/a63938b5-ed68-4da1-94eb-55d69e3fd056)
+![image](https://github.com/user-attachments/assets/ad7c1542-0c54-47b0-997f-cd838f5e1aae)
+![image](https://github.com/user-attachments/assets/f239ea21-a837-4e17-843d-3f162c5332cf)
 
 
-![Screenshot 2025-05-23 at 00 33 31](https://github.com/user-attachments/assets/49c1142a-6ccb-400d-a67e-0ab782a7e72c)
-![Screenshot 2025-05-23 at 00 33 44](https://github.com/user-attachments/assets/e53fd249-b900-47a8-870f-77bce71f8dc1)
-![Screenshot 2025-05-23 at 00 34 04](https://github.com/user-attachments/assets/f8635015-feb0-4d85-8d70-8bec6f1cabc6)
