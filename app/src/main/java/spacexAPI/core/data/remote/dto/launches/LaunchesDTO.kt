@@ -1,6 +1,6 @@
 package spacexAPI.core.data.remote.dto.launches
 
-data class LaunchesAPI(
+data class LaunchesDTO(
     val flight_number: Int,
     val mission_name: String,
     val launch_year: String,

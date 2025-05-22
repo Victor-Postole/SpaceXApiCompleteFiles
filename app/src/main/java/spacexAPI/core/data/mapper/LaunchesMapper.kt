@@ -1,6 +1,6 @@
 package spacexAPI.core.data.mapper
 
-import spacexAPI.core.data.remote.dto.launches.LaunchesAPI
+import spacexAPI.core.data.remote.dto.launches.LaunchesDTO
 import spacexAPI.core.data.remote.dto.launches.LinksDTO
 import spacexAPI.core.data.remote.dto.launches.RocketDTO
 import spacexAPI.core.domain.model.launchesModels.LaunchModel
@@ -20,7 +20,7 @@ fun LinksDTO.toDomain(): LinksModel = LinksModel(
     wikipedia = this.wikipedia
 )
 
-fun LaunchesAPI.toDomain(): LaunchModel = LaunchModel(
+fun LaunchesDTO.toDomain(): LaunchModel = LaunchModel(
     flightNumber = this.flight_number,
     missionName = this.mission_name,
     launchYear = this.launch_year,

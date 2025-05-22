@@ -1,14 +1,14 @@
 package spacexAPI.core.data.mapper
 
-import spacexAPI.core.data.remote.dto.CompanyInfoAPI
-import spacexAPI.core.data.remote.dto.companyInfo.Headquarters
-import spacexAPI.core.data.remote.dto.companyInfo.Links
-import spacexAPI.core.domain.model.companyInfo.CompanyInfoModel
-import spacexAPI.core.domain.model.companyInfo.HeadquartersModel
-import spacexAPI.core.domain.model.companyInfo.LinksModel
+import spacexAPI.core.data.remote.dto.CompanyInfoDTO
+import spacexAPI.core.data.remote.dto.companyinfo.HeadquartersDTO
+import spacexAPI.core.data.remote.dto.companyinfo.CompanyLinksDTO
+import spacexAPI.core.domain.model.companyinfo.CompanyInfoModel
+import spacexAPI.core.domain.model.companyinfo.HeadquartersModel
+import spacexAPI.core.domain.model.companyinfo.LinksModel
 
 
-fun CompanyInfoAPI.toDomain(): CompanyInfoModel {
+fun CompanyInfoDTO.toDomain(): CompanyInfoModel {
     return CompanyInfoModel(
         ceo = ceo,
         coo = coo,
@@ -28,7 +28,7 @@ fun CompanyInfoAPI.toDomain(): CompanyInfoModel {
     )
 }
 
-fun Headquarters.toDomain(): HeadquartersModel {
+fun HeadquartersDTO.toDomain(): HeadquartersModel {
     return HeadquartersModel(
         address = address,
         city = city,
@@ -36,7 +36,7 @@ fun Headquarters.toDomain(): HeadquartersModel {
     )
 }
 
-fun Links.toDomain(): LinksModel {
+fun CompanyLinksDTO.toDomain(): LinksModel {
     return LinksModel(
         website = website,
         flickr = flickr,

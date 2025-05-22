@@ -41,7 +41,7 @@ class CompanyInfoFormatterTest {
     }
 
     @Test
-    fun `formatCompanyName with name containing special characters`() {
+    fun `formatCompanyName with name`() {
         // Arrange
         val input = "Sp@ceX & Co."
 

@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import spacexAPI.core.data.mapper.toDomain
 import spacexAPI.core.data.remote.api.SpaceXApi
-import spacexAPI.core.domain.model.companyInfo.CompanyInfoModel
+import spacexAPI.core.domain.model.companyinfo.CompanyInfoModel
 import spacexAPI.core.domain.model.launchesModels.LaunchModel
 import spacexAPI.core.domain.repository.SpacexAPIRepository
 import spacexAPI.util.Resource

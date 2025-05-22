@@ -6,9 +6,11 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -28,6 +30,7 @@ fun MainScreen(
 ) {
     val state by viewModel.state
     var showSortDialog by remember { mutableStateOf(false) }
+
 
     Scaffold(
         topBar = {
@@ -111,27 +114,23 @@ fun MainScreen(
     }
 
     if (showSortDialog) {
-        var selectedYear by remember { mutableStateOf<String?>(null) }
-        val allYears = state.launches.mapNotNull { it.launchYear }.distinct().sorted()
+        val tempSelectedYear = remember { mutableStateOf(viewModel.selectedYear) }
+        val tempSuccessFilter = remember { mutableStateOf(viewModel.successFilter) }
+        val tempSortAsc = remember { mutableStateOf(viewModel.sortAsc) }
 
-        var successFilter by remember { mutableStateOf("All") }
-        var sortAsc by remember { mutableStateOf(true) }
+        val allYears = viewModel.allLaunchYears
+
 
         AlertDialog(
-            onDismissRequest = {
-                selectedYear = null
-                successFilter = "All"
-                sortAsc = true
-                showSortDialog = false
-            },
+            onDismissRequest = { showSortDialog = false },
             title = { Text("Filter launches") },
             text = {
                 Column {
                     Text("Launch Year:")
                     DropdownSelector(
                         options = allYears,
-                        selected = selectedYear,
-                        onSelected = { selectedYear = it }
+                        selected = tempSelectedYear.value,
+                        onSelected = { tempSelectedYear.value = it }
                     )
 
                     Spacer(Modifier.height(12.dp))
@@ -139,27 +138,29 @@ fun MainScreen(
                     Text("Launch Success:")
                     DropdownSelector(
                         options = listOf("All", "Success", "Fail"),
-                        selected = successFilter,
-                        onSelected = { successFilter = it }
+                        selected = tempSuccessFilter.value,
+                        onSelected = { tempSuccessFilter.value = it }
                     )
 
                     Spacer(Modifier.height(12.dp))
 
                     Text("Sort by date:")
-
                     DropdownSelector(
                         options = listOf("ASC", "DESC"),
-                        selected = if (sortAsc) "ASC" else "DESC",
-                        onSelected = { sortAsc = it == "ASC" }
+                        selected = if (tempSortAsc.value) "ASC" else "DESC",
+                        onSelected = { tempSortAsc.value = it == "ASC" }
                     )
                 }
             },
             confirmButton = {
                 TextButton(onClick = {
+                    viewModel.selectedYear = tempSelectedYear.value
+                    viewModel.successFilter = tempSuccessFilter.value
+                    viewModel.sortAsc = tempSortAsc.value
                     viewModel.applyLaunchFilters(
-                        years = selectedYear?.let { listOf(it) } ?: emptyList(),
-                        success = successFilter,
-                        asc = sortAsc
+                        years = tempSelectedYear.value?.let { listOf(it) } ?: emptyList(),
+                        success = tempSuccessFilter.value,
+                        asc = tempSortAsc.value
                     )
                     showSortDialog = false
                 }) {
@@ -167,16 +168,11 @@ fun MainScreen(
                 }
             },
             dismissButton = {
-
                 TextButton(onClick = {
-                    selectedYear = null
-                    successFilter = "All"
-                    sortAsc = true
                     showSortDialog = false
                 }) {
                     Text("Cancel")
                 }
-
             }
         )
     }

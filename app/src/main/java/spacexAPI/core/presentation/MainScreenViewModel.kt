@@ -1,19 +1,24 @@
 package spacexAPI.core.presentation
 
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import spacexAPI.core.domain.model.launchesModels.LaunchModel
-import spacexAPI.core.domain.model.launchesModels.RocketModel
 import spacexAPI.core.domain.repository.SpacexAPIRepository
 import spacexAPI.util.Resource
 
 class MainScreenViewModel(
-    private val spacexAPIRepository: SpacexAPIRepository
+    private val spacexAPIRepository: SpacexAPIRepository,
 ) : ViewModel() {
+
+    var selectedYear by mutableStateOf<String?>(null)
+    var successFilter by mutableStateOf("All")
+    var sortAsc by mutableStateOf(true)
+    val allLaunchYears: List<String> get() = originalLaunches.mapNotNull { it.launchYear }.distinct().sorted()
 
     private val _state = mutableStateOf(CompanyInfoState())
     val state: State<CompanyInfoState> = _state
@@ -23,11 +28,8 @@ class MainScreenViewModel(
     init {
 
         viewModelScope.launch {
-
             getCompanyDetails()
-
             getAllLaunches()
-
         }
     }
 
@@ -72,7 +74,7 @@ class MainScreenViewModel(
 
                 is Resource.Success -> {
                     val launches = result.data ?: emptyList()
-                    originalLaunches = launches // ✅ păstrezi originalul
+                    originalLaunches = launches
                     _state.value = _state.value.copy(
                         launches = launches,
                         isLoading = false

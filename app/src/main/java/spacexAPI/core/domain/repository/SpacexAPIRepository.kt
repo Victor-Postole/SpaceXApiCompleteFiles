@@ -1,7 +1,7 @@
 package spacexAPI.core.domain.repository
 
 import kotlinx.coroutines.flow.Flow
-import spacexAPI.core.domain.model.companyInfo.CompanyInfoModel
+import spacexAPI.core.domain.model.companyinfo.CompanyInfoModel
 import spacexAPI.core.domain.model.launchesModels.LaunchModel
 import spacexAPI.util.Resource
 

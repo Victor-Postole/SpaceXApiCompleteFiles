@@ -1,9 +1,9 @@
 package spacexAPI.core.data.remote.dto
 
-import spacexAPI.core.data.remote.dto.companyInfo.Headquarters
-import spacexAPI.core.data.remote.dto.companyInfo.Links
+import spacexAPI.core.data.remote.dto.companyinfo.HeadquartersDTO
+import spacexAPI.core.data.remote.dto.companyinfo.CompanyLinksDTO
 
-data class CompanyInfoAPI(
+data class CompanyInfoDTO(
     val name: String,
     val founder: String,
     val founded: Int,
@@ -16,7 +16,7 @@ data class CompanyInfoAPI(
     val cto_propulsion: String,
     val valuation: Long,
     val summary: String,
-    val headquarters: Headquarters,
-    val links: Links,
+    val headquarters: HeadquartersDTO,
+    val links: CompanyLinksDTO,
     val vehicles: Int
 )

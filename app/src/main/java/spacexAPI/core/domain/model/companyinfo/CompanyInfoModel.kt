@@ -1,4 +1,4 @@
-package spacexAPI.core.domain.model.companyInfo
+package spacexAPI.core.domain.model.companyinfo
 
 
 data class CompanyInfoModel(
